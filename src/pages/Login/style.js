@@ -15,6 +15,10 @@ export const LoginTitle = styled.h1`
   padding-top: 50px;
   font-size: 20px;
   margin-bottom: 18px;
+
+  @media (min-width: 768px) {
+    font-size: 24px;
+  }
 `;
 
 export const LoginForm = styled.form`
@@ -58,6 +62,7 @@ export const LoginForm = styled.form`
     border-radius: 4px;
     padding-inline: 4px;
     outline: none;
+    border: 1px solid #ffffff;
   }
 
   .inputEmail::placeholder,
@@ -88,5 +93,9 @@ export const LoginForm = styled.form`
     background-color: #868e96;
     color: #ffffff;
     cursor: pointer;
+  }
+
+  @media (min-width: 768px) {
+    min-width: 450px;
   }
 `;
