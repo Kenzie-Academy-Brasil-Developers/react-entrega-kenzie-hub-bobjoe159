@@ -59,9 +59,9 @@ export default function Register() {
       <ToastContainer theme="dark" />
       <StyledHeader className="animate__animated animate__fadeIn">
         <h2>Kenzie Hub</h2>
-        <button>
-          <Link to="/">Voltar</Link>
-        </button>
+        <Link to="/">
+          <button>Voltar</button>
+        </Link>
       </StyledHeader>
       <StyledDiv className="animate__animated animate__fadeInLeft">
         <div>
