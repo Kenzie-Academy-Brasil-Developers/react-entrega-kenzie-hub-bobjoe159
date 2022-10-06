@@ -39,10 +39,11 @@ export default function Dashboard({ setToken }) {
       <StyledHeader>
         <div>
           <h2 className="animate__animated animate__fadeInLeft">Kenzie Hub</h2>
-          <button className="animate__animated animate__fadeInRight">
-            <Link to="/" onClick={cleanLocalStorage}>
-              Logout
-            </Link>
+          <button
+            onClick={cleanLocalStorage}
+            className="animate__animated animate__fadeInRight"
+          >
+            <Link to="/">Logout</Link>
           </button>
         </div>
       </StyledHeader>
