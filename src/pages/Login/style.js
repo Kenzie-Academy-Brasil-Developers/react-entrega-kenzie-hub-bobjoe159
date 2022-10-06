@@ -41,6 +41,11 @@ export const LoginForm = styled.form`
     text-align: center;
   }
 
+  div {
+    width: 100%;
+    background-color: yellow;
+  }
+
   button {
     width: 100%;
     margin-bottom: 34px;
@@ -57,6 +62,7 @@ export const LoginForm = styled.form`
     border: none;
     text-decoration: none;
     text-align: center;
+    margin-bottom: 0px;
   }
 
   .accountAlert {

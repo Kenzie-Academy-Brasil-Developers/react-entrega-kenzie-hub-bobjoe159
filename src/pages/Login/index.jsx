@@ -77,9 +77,9 @@ export default function Login({ setToken }) {
         <p className="errorMessage">{errors.password?.message}</p>
         <button className="loginButton">Entrar</button>
         <p className="accountAlert">Ainda não possui uma conta?</p>
-        <div className="registerButton">
-          <Link to="/register">Cadastre-se</Link>
-        </div>
+        <Link to="/register">
+          <button className="registerButton">Cadastre-se</button>
+        </Link>
       </LoginForm>
     </LoginDiv>
   );
