@@ -18,7 +18,6 @@ export const LinkStyled = styled(Link)`
 export const LoginTitle = styled.h1`
   text-align: center;
   color: #ff577f;
-  padding-top: 50px;
   font-size: 20px;
   margin-bottom: 18px;
 
