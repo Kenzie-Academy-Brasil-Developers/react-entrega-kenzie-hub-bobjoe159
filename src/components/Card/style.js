@@ -9,7 +9,7 @@ export const ModalStyled = styled(Modal)`
   padding: 0;
   outline: none;
   background-color: #212529;
-  margin: 15% auto;
+  margin: 60% auto;
   margin-inline: 14px;
 
   div {
