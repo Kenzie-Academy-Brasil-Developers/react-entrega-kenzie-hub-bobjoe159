@@ -2,12 +2,17 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 export const LoginDiv = styled.div`
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-top: 40%;
+
+  @media (min-width: 768px) {
+    margin-top: 10%;
+  }
 `;
 
 export const LinkStyled = styled(Link)`
@@ -111,6 +116,12 @@ export const LoginForm = styled.form`
     background-color: #ff577f;
     color: #ffffff;
     cursor: pointer;
+  }
+
+  .loginButton:hover,
+  .registerButton:hover {
+    filter: brightness(1.2);
+    transition: 0.4s;
   }
 
   .registerButton {

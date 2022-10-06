@@ -52,7 +52,7 @@ export default function Dashboard({ setToken }) {
     setTimeout(() => {
       setToken("");
       localStorage.clear();
-    }, 5000);
+    }, 2000);
   }
 
   function openModal() {
@@ -125,7 +125,7 @@ export default function Dashboard({ setToken }) {
           <Link to="/">
             <button
               onClick={cleanLocalStorage}
-              className="animate__animated animate__fadeInRight"
+              className="logoutButton animate__animated animate__fadeInRight"
             >
               Logout
             </button>

@@ -131,6 +131,11 @@ export const StyledHeader = styled.header`
     cursor: pointer;
   }
 
+  .logoutButton:hover {
+    filter: brightness(1.4);
+    transition: 0.4s;
+  }
+
   @media (min-width: 768px) {
     width: 100%;
     margin: 0 auto;
@@ -158,6 +163,11 @@ export const StyledError = styled.div`
 
   .addIcon {
     cursor: pointer;
+  }
+
+  .addIcon:hover {
+    filter: brightness(1.4);
+    transition: 0.4s;
   }
 `;
 
