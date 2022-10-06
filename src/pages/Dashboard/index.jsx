@@ -8,26 +8,29 @@ import {
 import "react-toastify/dist/ReactToastify.css";
 import { toast, ToastContainer } from "react-toastify";
 import api from "../../services/axios";
+import "animate.css";
 
 export default function Dashboard({ setToken }) {
   const [loggedUser, setLoggedUser] = useState("");
-  const user = useEffect(() => {
+  const [loggedModule, setloggedModule] = useState("");
+  useEffect(() => {
     const userId = localStorage.getItem("@kenzieHub:Id");
 
     api
       .get(`/users/${userId}`)
-      .then((resp) => setLoggedUser(resp.data.name))
+      .then((resp) => {
+        setLoggedUser(resp.data.name);
+        setloggedModule(resp.data.course_module);
+      })
       .catch((err) => console.log(err));
   });
 
-  console.log(user);
-
   function cleanLocalStorage() {
-    localStorage.clear();
     toast.success("Logout realizado com sucesso.");
     setTimeout(() => {
       setToken("");
-    }, 500);
+      localStorage.clear();
+    }, 5000);
   }
 
   return (
@@ -35,21 +38,21 @@ export default function Dashboard({ setToken }) {
       <ToastContainer theme="dark" />
       <StyledHeader>
         <div>
-          <h2>Kenzie Hub</h2>
-          <button>
+          <h2 className="animate__animated animate__fadeInLeft">Kenzie Hub</h2>
+          <button className="animate__animated animate__fadeInRight">
             <Link to="/" onClick={cleanLocalStorage}>
               Logout
             </Link>
           </button>
         </div>
       </StyledHeader>
-      <StyledDiv>
+      <StyledDiv className="animate__animated animate__fadeIn animate__delay-1s">
         <div>
           <h2>Olá, {loggedUser}</h2>
-          <span>Módulo 1 (Introdução ao front-end)</span>
+          <span>{loggedModule}</span>
         </div>
       </StyledDiv>
-      <StyledError>
+      <StyledError className="animate__animated animate__fadeIn">
         <div>
           <h2>Que pena, estamos em desenvolvimento :(</h2>
           <p>

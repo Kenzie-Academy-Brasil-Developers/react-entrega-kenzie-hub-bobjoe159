@@ -28,6 +28,7 @@ export const StyledDiv = styled.div`
   @media (min-width: 768px) {
     div {
       flex-direction: row;
+    }
   }
 `;
 

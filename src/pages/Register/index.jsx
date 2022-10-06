@@ -7,6 +7,7 @@ import { toast, ToastContainer } from "react-toastify";
 import api from "../../services/axios.js";
 import "react-toastify/dist/ReactToastify.css";
 import * as yup from "yup";
+import "animate.css";
 
 const schema = yup.object({
   email: yup.string().email().required("O email é obrigatório."),
@@ -41,15 +42,14 @@ export default function Register() {
       contact: data.contact,
       course_module: data.course_module,
     };
+
     api
       .post("/users", apiLogin)
       .then((resp) => {
         toast.success("Usuário registrado com sucesso!");
-        localStorage.setItem("@kenzieHub:token", resp.data.id);
-        console.log(resp);
-        setTimeout(() => {
-          window.location.replace("/dashboard");
-        }, 2000);
+        document.querySelectorAll("input").forEach((input) => {
+          input.value = "";
+        });
       })
       .catch((err) => console.log(err));
   }
@@ -57,13 +57,13 @@ export default function Register() {
   return (
     <>
       <ToastContainer theme="dark" />
-      <StyledHeader>
+      <StyledHeader className="animate__animated animate__fadeIn">
         <h2>Kenzie Hub</h2>
         <button>
           <Link to="/">Voltar</Link>
         </button>
       </StyledHeader>
-      <StyledDiv>
+      <StyledDiv className="animate__animated animate__fadeInLeft">
         <div>
           <section>
             <h3>Crie sua conta</h3>

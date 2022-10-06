@@ -5,13 +5,17 @@ import api from "../../services/axios.js";
 import * as yup from "yup";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import "animate.css";
 
 const schema = yup.object({
-  email: yup.string().email().required("O email é obrigatório."),
+  email: yup
+    .string()
+    .email("Digite um email válido.")
+    .required("O email é obrigatório."),
   password: yup.string().required("Obrigatório digitar uma senha."),
 });
 
-export default function Login() {
+export default function Login({ setToken }) {
   const {
     register,
     handleSubmit,
@@ -24,11 +28,9 @@ export default function Login() {
     api
       .post("/sessions", data)
       .then((resp) => {
-        console.log({ resp, data });
         toast.success("Login realizado com sucesso!");
-        console.log(resp);
         setTimeout(() => {
-          window.location.replace("/dashboard");
+          setToken(resp.data.token);
           localStorage.setItem("@kenzieHub:token", resp.data.token);
           localStorage.setItem("@kenzieHub:Id", resp.data.user.id);
         }, 2000);
@@ -43,7 +45,10 @@ export default function Login() {
     <LoginDiv>
       <ToastContainer theme="dark" />
       <LoginTitle>Kenzie Hub</LoginTitle>
-      <LoginForm onSubmit={handleSubmit(handleLogin)}>
+      <LoginForm
+        onSubmit={handleSubmit(handleLogin)}
+        className="animate__animated animate__fadeInUp"
+      >
         <h2>Login</h2>
         <label htmlFor="email" className="labelEmail">
           Email

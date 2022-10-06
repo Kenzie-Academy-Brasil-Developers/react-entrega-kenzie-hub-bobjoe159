@@ -12,14 +12,14 @@ const RoutesMain = () => {
     if (token) {
       setToken(token);
     }
-  }, []);
+  }, [token]);
 
   return (
     <Routes>
       {!token ? (
-        <Route path="/" element={<Login />} />
+        <Route path="/" element={<Login setToken={setToken} />} />
       ) : (
-        <Route path="/dashboard" element={<Dashboard setToken={setToken} />} />
+        <Route path="/" element={<Dashboard setToken={setToken} />} />
       )}
       <Route path="/register" element={<Register />} />
       <Route path="/dashboard" element={<Dashboard />} />
