@@ -1,15 +1,19 @@
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { LoginDiv, LoginTitle, LoginForm, LinkStyled as Link } from "./style";
 import * as yup from "yup";
-import { LoginDiv, LoginTitle, LoginForm } from "./style";
 
 const schema = yup.object({
-  email: yup.string().email().required(),
-  password: yup.string().required(),
+  email: yup.string().email().required("O email é obrigatório."),
+  password: yup.string().required("Obrigatório digitar uma senha."),
 });
 
 export default function Login() {
-  const { register, handleSubmit } = useForm({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
     resolver: yupResolver(schema),
   });
 
@@ -31,8 +35,10 @@ export default function Login() {
           name="email"
           id="email"
           placeholder="Insira seu e-mail"
+          autoComplete="off"
           {...register("email")}
         />
+        <p className="errorMessage">{errors.email?.message}</p>
         <label htmlFor="password" className="labelPassword">
           Senha
         </label>
@@ -44,9 +50,12 @@ export default function Login() {
           placeholder="Insira sua senha"
           {...register("password")}
         />
+        <p className="errorMessage">{errors.password?.message}</p>
         <button className="loginButton">Entrar</button>
-        <p>Ainda não possui uma conta?</p>
-        <button className="registerButton">Cadastre-se</button>
+        <p className="accountAlert">Ainda não possui uma conta?</p>
+        <div className="registerButton">
+          <Link to="/register">Cadastre-se</Link>
+        </div>
       </LoginForm>
     </LoginDiv>
   );

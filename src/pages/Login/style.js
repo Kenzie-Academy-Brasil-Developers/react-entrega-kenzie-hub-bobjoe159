@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 export const LoginDiv = styled.div`
   width: 100vw;
@@ -7,6 +8,11 @@ export const LoginDiv = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+`;
+
+export const LinkStyled = styled(Link)`
+  text-decoration: none;
+  color: #fff;
 `;
 
 export const LoginTitle = styled.h1`
@@ -35,19 +41,36 @@ export const LoginForm = styled.form`
     text-align: center;
   }
 
-  p {
-    text-align: center;
-    margin-bottom: 18px;
-    color: #868e96;
-    font-size: 12px;
-  }
-
   button {
     width: 100%;
     margin-bottom: 34px;
     padding-block: 10px;
     border-radius: 4px;
     border: none;
+    text-decoration: none;
+  }
+
+  .registerButton {
+    width: 100%;
+    padding-block: 10px;
+    border-radius: 4px;
+    border: none;
+    text-decoration: none;
+    text-align: center;
+  }
+
+  .accountAlert {
+    text-align: center;
+    margin-bottom: 18px;
+    color: #868e96;
+    font-size: 12px;
+  }
+
+  .errorMessage {
+    font-size: 12px;
+    color: #fff;
+    margin: 10px 0 20px 0;
+    color: #ff577f;
   }
 
   .inputEmail,
@@ -74,13 +97,9 @@ export const LoginForm = styled.form`
   .labelPassword {
     text-align: left;
     display: block;
-    margin-block: 20px;
     font-size: 12px;
     font-weight: 400;
-  }
-
-  .inputPassword {
-    margin-bottom: 34px;
+    margin-bottom: 6px;
   }
 
   .loginButton {
@@ -92,6 +111,7 @@ export const LoginForm = styled.form`
   .registerButton {
     background-color: #868e96;
     color: #ffffff;
+    text-decoration: none;
     cursor: pointer;
   }
 
