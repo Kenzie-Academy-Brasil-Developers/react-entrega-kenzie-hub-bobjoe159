@@ -13,11 +13,21 @@ export const StyledDiv = styled.div`
 
   div {
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     max-width: 960px;
     padding: 30px 36px 30px 36px;
     margin: 0 auto;
     color: #fff;
+  }
+
+  div h2 {
+    margin-bottom: 12px;
+  }
+
+  @media (min-width: 768px) {
+    div {
+      flex-direction: row;
   }
 `;
 

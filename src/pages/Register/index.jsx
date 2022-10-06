@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { LinkStyled as Link } from "./style";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { toast, ToastContainer } from "react-toastify";
+import api from "../../services/axios.js";
 import "react-toastify/dist/ReactToastify.css";
 import * as yup from "yup";
 
@@ -32,8 +33,25 @@ export default function Register() {
   });
 
   function handleRegister(data) {
-    console.log(data);
-    toast.success("Usuário registrado com sucesso!");
+    const apiLogin = {
+      email: data.email,
+      password: data.password,
+      name: data.name,
+      bio: data.bio,
+      contact: data.contact,
+      course_module: data.course_module,
+    };
+    api
+      .post("/users", apiLogin)
+      .then((resp) => {
+        toast.success("Usuário registrado com sucesso!");
+        localStorage.setItem("@kenzieHub:token", resp.data.id);
+        console.log(resp);
+        setTimeout(() => {
+          window.location.replace("/dashboard");
+        }, 2000);
+      })
+      .catch((err) => console.log(err));
   }
 
   return (
@@ -116,9 +134,10 @@ export default function Register() {
 
             <label htmlFor="module">Selecionar módulo</label>
             <select id="module" {...register("course_module")}>
-              <option>Módulo 1</option>
-              <option>Módulo 2</option>
-              <option>Módulo 3</option>
+              <option>Primeiro módulo (Introdução ao Frontend)</option>
+              <option>Segundo módulo (Frontend Avançado)</option>
+              <option>Terceiro módulo (Introdução ao Backend)</option>
+              <option>Quarto módulo (Backend Avançado)</option>
             </select>
             <p className="errorMessage">{errors.course_module?.message}</p>
             <button type="submit">Cadastrar</button>

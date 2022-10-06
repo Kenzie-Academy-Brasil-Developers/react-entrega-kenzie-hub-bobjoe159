@@ -1,7 +1,10 @@
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { LoginDiv, LoginTitle, LoginForm, LinkStyled as Link } from "./style";
+import api from "../../services/axios.js";
 import * as yup from "yup";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const schema = yup.object({
   email: yup.string().email().required("O email é obrigatório."),
@@ -18,11 +21,27 @@ export default function Login() {
   });
 
   function handleLogin(data) {
-    console.log(data);
+    api
+      .post("/sessions", data)
+      .then((resp) => {
+        console.log({ resp, data });
+        toast.success("Login realizado com sucesso!");
+        console.log(resp);
+        setTimeout(() => {
+          window.location.replace("/dashboard");
+          localStorage.setItem("@kenzieHub:token", resp.data.token);
+          localStorage.setItem("@kenzieHub:Id", resp.data.user.id);
+        }, 2000);
+      })
+      .catch((err) => {
+        toast.error("Alguma coisa deu errado :(");
+        console.log(err);
+      });
   }
 
   return (
     <LoginDiv>
+      <ToastContainer theme="dark" />
       <LoginTitle>Kenzie Hub</LoginTitle>
       <LoginForm onSubmit={handleSubmit(handleLogin)}>
         <h2>Login</h2>
