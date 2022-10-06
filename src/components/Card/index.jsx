@@ -63,7 +63,12 @@ export default function Card({ card }) {
 
   return (
     <StyledCard>
-      <ModalStyled isOpen={modalIsOpen} onRequestClose={closeModal} style={bg}>
+      <ModalStyled
+        isOpen={modalIsOpen}
+        onRequestClose={closeModal}
+        style={bg}
+        className="modalRegister animate__animated animate__fadeInDown"
+      >
         <div>
           <h2>Editar Tecnologia: {card.title}</h2>
           <span onClick={closeModal}>X</span>

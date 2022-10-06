@@ -15,6 +15,7 @@ import "animate.css";
 import Card from "../../components/Card";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import "animate.css";
 
 const schema = yup.object({
   status: yup.string().required(),
@@ -90,7 +91,7 @@ export default function Dashboard({ setToken }) {
       <ModalStyled
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
-        className="modalRegister"
+        className="modalRegister animate__animated animate__fadeInDown"
         style={bg}
       >
         <form onSubmit={handleSubmit(handleRegisterTech)}>
