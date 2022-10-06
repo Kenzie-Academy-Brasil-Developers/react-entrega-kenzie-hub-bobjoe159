@@ -7,6 +7,7 @@ import { toast, ToastContainer } from "react-toastify";
 import api from "../../services/axios.js";
 import "react-toastify/dist/ReactToastify.css";
 import * as yup from "yup";
+import { useNavigate } from "react-router-dom";
 import "animate.css";
 
 const schema = yup.object({
@@ -25,6 +26,8 @@ const schema = yup.object({
 });
 
 export default function Register() {
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -50,6 +53,9 @@ export default function Register() {
         document.querySelectorAll("input").forEach((input) => {
           input.value = "";
         });
+        setTimeout(() => {
+          navigate("/");
+        }, 2000);
       })
       .catch((err) => console.log(err));
   }

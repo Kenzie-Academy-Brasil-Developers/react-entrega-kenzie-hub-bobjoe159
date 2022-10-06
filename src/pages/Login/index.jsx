@@ -62,7 +62,9 @@ export default function Login({ setToken }) {
           autoComplete="off"
           {...register("email")}
         />
-        <p className="errorMessage">{errors.email?.message}</p>
+        <p className="errorMessage animate__animated animate__fadeIn">
+          {errors.email?.message}
+        </p>
         <label htmlFor="password" className="labelPassword">
           Senha
         </label>
@@ -74,7 +76,9 @@ export default function Login({ setToken }) {
           placeholder="Insira sua senha"
           {...register("password")}
         />
-        <p className="errorMessage">{errors.password?.message}</p>
+        <p className="errorMessage animate__animated animate__fadeIn">
+          {errors.password?.message}
+        </p>
         <button className="loginButton">Entrar</button>
         <p className="accountAlert">Ainda não possui uma conta?</p>
         <Link to="/register">

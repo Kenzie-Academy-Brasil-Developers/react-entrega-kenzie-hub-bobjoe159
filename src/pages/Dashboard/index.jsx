@@ -39,12 +39,14 @@ export default function Dashboard({ setToken }) {
       <StyledHeader>
         <div>
           <h2 className="animate__animated animate__fadeInLeft">Kenzie Hub</h2>
-          <button
-            onClick={cleanLocalStorage}
-            className="animate__animated animate__fadeInRight"
-          >
-            <Link to="/">Logout</Link>
-          </button>
+          <Link to="/">
+            <button
+              onClick={cleanLocalStorage}
+              className="animate__animated animate__fadeInRight"
+            >
+              Logout
+            </button>
+          </Link>
         </div>
       </StyledHeader>
       <StyledDiv className="animate__animated animate__fadeIn animate__delay-1s">
