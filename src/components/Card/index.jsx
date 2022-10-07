@@ -8,23 +8,46 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
+import "animate.css";
 
 const schema = yup.object({
   status: yup.string().required("Selecione alguma tecnologia"),
 });
 
-export default function Card({ card }) {
+export default function Card({ card, setUserTechs }) {
   const [modalIsOpen, setIsOpen] = useState(false);
+  const [classAnimate, setClassAnimate] = useState(false);
 
   const { register, handleSubmit } = useForm({
     resolver: yupResolver(schema),
   });
 
   function handleDelete() {
+    setClassAnimate(true);
     api
       .delete(`/users/techs/${card.id}`)
       .then((resp) => {
         console.log(resp);
+        toast.success("Tecnologia removida com sucesso.");
+        setClassAnimate(true);
+        setTimeout(() => {
+          setUserTechs((oldUserTechs) => {
+            return oldUserTechs.filter((userTech) => userTech.id !== card.id);
+          });
+        }, 1000);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  function handleEdit(data) {
+    api
+      .put(`/users/techs/${card.id}`, data)
+      .then((resp) => {
+        console.log(resp);
+        toast.success("Tecnologia editada com sucesso!");
+        setIsOpen(false);
       })
       .catch((err) => {
         console.log(err);
@@ -39,20 +62,6 @@ export default function Card({ card }) {
     setIsOpen(false);
   }
 
-  function handleEdit(data) {
-    console.log(data);
-    api
-      .put(`/users/techs/${card.id}`, data)
-      .then((resp) => {
-        console.log(resp);
-        toast.success("Tecnologia editada com sucesso!");
-        setIsOpen(false);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
-
   ModalStyled.setAppElement("#root");
 
   const bg = {
@@ -62,7 +71,10 @@ export default function Card({ card }) {
   };
 
   return (
-    <StyledCard>
+    // SE HOUVER O CLASS ANIMATE TRUE, ELA VAI PEGAR A CLASSE E ADICIONAR AS DUAS"
+    <StyledCard
+      className={`${classAnimate && "animate__animated animate__backOutRight"}`}
+    >
       <ModalStyled
         isOpen={modalIsOpen}
         onRequestClose={closeModal}

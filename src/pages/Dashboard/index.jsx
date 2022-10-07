@@ -45,7 +45,7 @@ export default function Dashboard({ setToken }) {
         setUserTechs(resp.data.techs);
       })
       .catch((err) => console.log(err));
-  }, [loggedUserTechs]);
+  }, []);
 
   function cleanLocalStorage() {
     toast.success("Logout realizado com sucesso.");
@@ -70,6 +70,7 @@ export default function Dashboard({ setToken }) {
         console.log(resp);
         toast.success("Tecnologia adicionada com sucesso.");
         setIsOpen(false);
+        setUserTechs([...loggedUserTechs, data]);
       })
       .catch((err) => {
         console.log(err);
@@ -151,7 +152,9 @@ export default function Dashboard({ setToken }) {
         <div>
           <StyledUl>
             {loggedUserTechs ? (
-              loggedUserTechs.map((card) => <Card key={card.id} card={card} />)
+              loggedUserTechs.map((card) => (
+                <Card key={card.id} card={card} setUserTechs={setUserTechs} />
+              ))
             ) : (
               <></>
             )}
