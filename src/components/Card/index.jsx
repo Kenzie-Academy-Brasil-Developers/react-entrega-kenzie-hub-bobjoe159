@@ -14,7 +14,7 @@ const schema = yup.object({
   status: yup.string().required("Selecione alguma tecnologia"),
 });
 
-export default function Card({ card, setUserTechs }) {
+export default function Card({ card, loggedUserTechs, setUserTechs }) {
   const [modalIsOpen, setIsOpen] = useState(false);
   const [classAnimate, setClassAnimate] = useState(false);
 
@@ -48,9 +48,7 @@ export default function Card({ card, setUserTechs }) {
         console.log(resp);
         toast.success("Tecnologia editada com sucesso!");
         setIsOpen(false);
-        setUserTechs((oldUserTechs) => {
-          return oldUserTechs.filter((userTech) => userTech.id !== card.id);
-        });
+        setUserTechs(loggedUserTechs);
       })
       .catch((err) => {
         console.log(err);

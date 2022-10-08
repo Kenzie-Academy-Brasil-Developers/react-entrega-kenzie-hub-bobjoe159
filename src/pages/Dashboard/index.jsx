@@ -153,7 +153,12 @@ export default function Dashboard({ setToken }) {
           <StyledUl>
             {loggedUserTechs ? (
               loggedUserTechs.map((card) => (
-                <Card key={card.id} card={card} setUserTechs={setUserTechs} />
+                <Card
+                  key={card.id}
+                  card={card}
+                  loggedUserTechs={loggedUserTechs}
+                  setUserTechs={setUserTechs}
+                />
               ))
             ) : (
               <></>
