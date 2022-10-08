@@ -48,6 +48,9 @@ export default function Card({ card, setUserTechs }) {
         console.log(resp);
         toast.success("Tecnologia editada com sucesso!");
         setIsOpen(false);
+        setUserTechs((oldUserTechs) => {
+          return oldUserTechs.filter((userTech) => userTech.id !== card.id);
+        });
       })
       .catch((err) => {
         console.log(err);
