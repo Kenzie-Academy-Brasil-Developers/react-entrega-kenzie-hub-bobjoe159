@@ -26,6 +26,7 @@ export default function Dashboard({ setToken }) {
   const [loggedModule, setloggedModule] = useState("");
   const [loggedUserTechs, setUserTechs] = useState("");
   const [modalIsOpen, setIsOpen] = useState(false);
+  const [userEdit, setUserEdit] = useState(false);
 
   const {
     register,
@@ -43,9 +44,10 @@ export default function Dashboard({ setToken }) {
         setLoggedUser(resp.data.name);
         setloggedModule(resp.data.course_module);
         setUserTechs(resp.data.techs);
+        console.log("chamou");
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [userEdit]);
 
   function cleanLocalStorage() {
     toast.success("Logout realizado com sucesso.");
@@ -158,6 +160,7 @@ export default function Dashboard({ setToken }) {
                   card={card}
                   loggedUserTechs={loggedUserTechs}
                   setUserTechs={setUserTechs}
+                  setUserEdit={setUserEdit}
                 />
               ))
             ) : (
