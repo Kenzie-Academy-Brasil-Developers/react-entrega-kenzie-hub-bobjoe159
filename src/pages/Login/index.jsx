@@ -18,7 +18,7 @@ const schema = yup.object({
 });
 
 export default function Login() {
-  const [setToken] = useContext(AuthContext);
+  const [token, setToken] = useContext(AuthContext);
   const {
     register,
     handleSubmit,

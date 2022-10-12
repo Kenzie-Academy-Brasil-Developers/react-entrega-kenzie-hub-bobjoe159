@@ -24,7 +24,7 @@ const schema = yup.object({
 });
 
 export default function Dashboard() {
-  const [setToken] = useContext(AuthContext);
+  const [token, setToken] = useContext(AuthContext);
 
   const [loggedUser, setLoggedUser] = useState("");
   const [loggedModule, setloggedModule] = useState("");
@@ -70,6 +70,7 @@ export default function Dashboard() {
   }
 
   function handleRegisterTech(data) {
+    console.log(data);
     api
       .post("/users/techs/", data)
       .then((resp) => {

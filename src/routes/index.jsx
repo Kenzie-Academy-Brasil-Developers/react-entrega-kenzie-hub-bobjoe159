@@ -6,7 +6,7 @@ import { useContext } from "react";
 import { AuthContext } from "../providers/provider";
 
 const RoutesMain = () => {
-  const [token] = useContext(AuthContext);
+  const [token, setToken] = useContext(AuthContext);
 
   return (
     <Routes>
