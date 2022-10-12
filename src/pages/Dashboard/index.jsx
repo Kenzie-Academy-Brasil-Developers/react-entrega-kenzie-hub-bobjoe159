@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { useContext } from "react";
+import { AuthContext } from "../../providers/provider";
 import { useForm } from "react-hook-form";
 import {
   StyledHeader,
@@ -21,7 +23,9 @@ const schema = yup.object({
   status: yup.string().required(),
 });
 
-export default function Dashboard({ setToken }) {
+export default function Dashboard() {
+  const [setToken] = useContext(AuthContext);
+
   const [loggedUser, setLoggedUser] = useState("");
   const [loggedModule, setloggedModule] = useState("");
   const [loggedUserTechs, setUserTechs] = useState("");

@@ -2,24 +2,18 @@ import { Routes, Route } from "react-router-dom";
 import Register from "../pages/Register";
 import Login from "../pages/Login";
 import Dashboard from "../pages/Dashboard";
-import { useEffect, useState } from "react";
+import { useContext } from "react";
+import { AuthContext } from "../providers/provider";
 
 const RoutesMain = () => {
-  const [token, setToken] = useState("");
-
-  useEffect(() => {
-    const token = localStorage.getItem("@kenzieHub:token");
-    if (token) {
-      setToken(token);
-    }
-  }, [token]);
+  const [token] = useContext(AuthContext);
 
   return (
     <Routes>
       {!token ? (
-        <Route path="/" element={<Login setToken={setToken} />} />
+        <Route path="/" element={<Login />} />
       ) : (
-        <Route path="/" element={<Dashboard setToken={setToken} />} />
+        <Route path="/" element={<Dashboard />} />
       )}
       <Route path="/register" element={<Register />} />
       <Route path="/dashboard" element={<Dashboard />} />

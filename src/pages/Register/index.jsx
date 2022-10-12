@@ -11,7 +11,10 @@ import { useNavigate } from "react-router-dom";
 import "animate.css";
 
 const schema = yup.object({
-  email: yup.string().email().required("O email é obrigatório."),
+  email: yup
+    .string()
+    .email("Deve ser um email válido.")
+    .required("O email é obrigatório."),
   password: yup
     .string()
     .min(6, "No mínimo 6 caracteres")

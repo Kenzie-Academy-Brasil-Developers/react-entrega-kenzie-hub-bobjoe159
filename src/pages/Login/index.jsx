@@ -1,3 +1,5 @@
+import { useContext } from "react";
+import { AuthContext } from "../../providers/provider";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { LoginDiv, LoginTitle, LoginForm, LinkStyled as Link } from "./style";
@@ -15,7 +17,8 @@ const schema = yup.object({
   password: yup.string().required("Obrigatório digitar uma senha."),
 });
 
-export default function Login({ setToken }) {
+export default function Login() {
+  const [setToken] = useContext(AuthContext);
   const {
     register,
     handleSubmit,
