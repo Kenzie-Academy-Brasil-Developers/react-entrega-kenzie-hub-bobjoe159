@@ -15,7 +15,7 @@ const RoutesMain = () => {
     if (token) {
       navigate("/");
     }
-  });
+  }, [token]);
 
   return (
     <Routes>
