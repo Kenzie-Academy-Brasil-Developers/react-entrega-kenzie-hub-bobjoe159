@@ -8,6 +8,7 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const token = localStorage.getItem("@kenzieHub:token");
+
     if (token) {
       setToken(token);
     }

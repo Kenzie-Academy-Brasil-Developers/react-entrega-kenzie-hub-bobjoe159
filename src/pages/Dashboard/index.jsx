@@ -58,16 +58,8 @@ export default function Dashboard() {
     localStorage.clear();
   }
 
-  function openModal() {
-    setIsOpen(true);
-  }
-
-  function closeModal() {
-    setIsOpen(false);
-  }
-
-  function handleRegisterTech(data) {
-    api
+  async function handleRegisterTech(data) {
+    await api
       .post("/users/techs/", data)
       .then((resp) => {
         console.log(resp);
@@ -79,6 +71,14 @@ export default function Dashboard() {
         console.log(err);
         toast.error("Alguma coisa deu errado. :(");
       });
+  }
+
+  function openModal() {
+    setIsOpen(true);
+  }
+
+  function closeModal() {
+    setIsOpen(false);
   }
 
   ModalStyled.setAppElement("#root");

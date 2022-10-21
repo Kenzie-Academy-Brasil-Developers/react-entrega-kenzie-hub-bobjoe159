@@ -29,8 +29,8 @@ export default function Login() {
     resolver: yupResolver(schema),
   });
 
-  function handleLogin(data) {
-    api
+  async function handleLogin(data) {
+    await api
       .post("/sessions", data)
       .then((resp) => {
         toast.success("Login realizado com sucesso!");
