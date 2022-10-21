@@ -20,7 +20,6 @@ export default function Card({
   setUserTechs,
   setUserEdit,
 }) {
-  console.log(loggedUserTechs);
   const [modalIsOpen, setIsOpen] = useState(false);
   const [classAnimate, setClassAnimate] = useState(false);
 

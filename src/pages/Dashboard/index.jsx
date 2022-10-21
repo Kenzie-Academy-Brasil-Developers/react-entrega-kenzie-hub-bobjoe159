@@ -67,7 +67,6 @@ export default function Dashboard() {
   }
 
   function handleRegisterTech(data) {
-    console.log(data);
     api
       .post("/users/techs/", data)
       .then((resp) => {
