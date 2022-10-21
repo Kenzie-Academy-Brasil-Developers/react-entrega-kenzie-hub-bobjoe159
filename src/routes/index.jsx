@@ -4,9 +4,18 @@ import Login from "../pages/Login";
 import Dashboard from "../pages/Dashboard";
 import { useContext } from "react";
 import { AuthContext } from "../providers/provider";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const RoutesMain = () => {
+  const navigate = useNavigate();
   const [token, setToken] = useContext(AuthContext);
+
+  useEffect(() => {
+    if (token) {
+      navigate("/");
+    }
+  });
 
   return (
     <Routes>
