@@ -11,12 +11,12 @@ const RoutesMain = () => {
   return (
     <Routes>
       {!token ? (
-        <Route path="/" element={<Login />} />
+        <Route exact path="/" element={<Login />} />
       ) : (
-        <Route path="/" element={<Dashboard />} />
+        <Route exact path="/" element={<Dashboard />} />
       )}
-      <Route path="/register" element={<Register />} />
-      <Route path="/dashboard" element={<Dashboard />} />
+      <Route exact path="/register" element={<Register />} />
+      <Route exact path="/dashboard" element={<Dashboard />} />
     </Routes>
   );
 };

@@ -48,17 +48,14 @@ export default function Dashboard() {
         setLoggedUser(resp.data.name);
         setloggedModule(resp.data.course_module);
         setUserTechs(resp.data.techs);
-        console.log("chamou");
       })
       .catch((err) => console.log(err));
   }, [userEdit]);
 
   function cleanLocalStorage() {
     toast.success("Logout realizado com sucesso.");
-    setTimeout(() => {
-      setToken("");
-      localStorage.clear();
-    }, 2000);
+    setToken("");
+    localStorage.clear();
   }
 
   function openModal() {

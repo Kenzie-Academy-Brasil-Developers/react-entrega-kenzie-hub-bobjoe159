@@ -8,6 +8,7 @@ import * as yup from "yup";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "animate.css";
+import { useNavigate } from "react-router-dom";
 
 const schema = yup.object({
   email: yup
@@ -18,6 +19,7 @@ const schema = yup.object({
 });
 
 export default function Login() {
+  const navigate = useNavigate();
   const [token, setToken] = useContext(AuthContext);
   const {
     register,
@@ -32,11 +34,10 @@ export default function Login() {
       .post("/sessions", data)
       .then((resp) => {
         toast.success("Login realizado com sucesso!");
-        setTimeout(() => {
-          setToken(resp.data.token);
-          localStorage.setItem("@kenzieHub:token", resp.data.token);
-          localStorage.setItem("@kenzieHub:Id", resp.data.user.id);
-        }, 2000);
+        setToken(resp.data.token);
+        localStorage.setItem("@kenzieHub:token", resp.data.token);
+        localStorage.setItem("@kenzieHub:Id", resp.data.user.id);
+        navigate("/dashboard");
       })
       .catch((err) => {
         toast.error("Alguma coisa deu errado :(");

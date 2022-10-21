@@ -56,9 +56,7 @@ export default function Register() {
         document.querySelectorAll("input").forEach((input) => {
           input.value = "";
         });
-        setTimeout(() => {
-          navigate("/");
-        }, 2000);
+        navigate("/");
       })
       .catch((err) => console.log(err));
   }
