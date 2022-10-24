@@ -54,14 +54,17 @@ export default function Dashboard() {
 
   useEffect(() => {
     const userId = localStorage.getItem("@kenzieHub:Id");
-    api
-      .get(`/users/${userId}`)
-      .then((resp) => {
-        setLoggedUser(resp.data.name);
-        setloggedModule(resp.data.course_module);
-        setUserTechs(resp.data.techs);
-      })
-      .catch((err) => console.log(err));
+    const asyncCallback = async () => {
+      await api
+        .get(`/users/${userId}`)
+        .then((resp) => {
+          setLoggedUser(resp.data.name);
+          setloggedModule(resp.data.course_module);
+          setUserTechs(resp.data.techs);
+        })
+        .catch((err) => console.log(err));
+    };
+    asyncCallback();
   }, [userEdit]);
 
   function cleanLocalStorage() {
