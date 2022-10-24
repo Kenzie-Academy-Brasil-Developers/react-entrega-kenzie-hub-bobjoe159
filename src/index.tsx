@@ -5,7 +5,10 @@ import App from "./App";
 import { GlobalStyle } from "./global";
 import { BrowserRouter } from "react-router-dom";
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
+const root = ReactDOM.createRoot(
+  document.getElementById("root") as HTMLElement
+);
+
 root.render(
   <>
     <GlobalStyle />

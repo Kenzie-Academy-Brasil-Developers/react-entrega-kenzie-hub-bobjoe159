@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { LinkStyled as Link } from "./style";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { toast, ToastContainer } from "react-toastify";
-import api from "../../services/axios.js";
+import api from "../../services/axios";
 import "react-toastify/dist/ReactToastify.css";
 import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
@@ -28,6 +28,16 @@ const schema = yup.object({
   course_module: yup.string().required(),
 });
 
+interface iRegister {
+  email: string;
+  password: string;
+  confirmPassword: string;
+  name: string;
+  bio: string;
+  contact: string;
+  course_module: string;
+}
+
 export default function Register() {
   const navigate = useNavigate();
 
@@ -35,11 +45,11 @@ export default function Register() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
+  } = useForm<iRegister>({
     resolver: yupResolver(schema),
   });
 
-  function handleRegister(data) {
+  function handleRegister(data: iRegister) {
     const apiLogin = {
       email: data.email,
       password: data.password,
@@ -81,7 +91,6 @@ export default function Register() {
             <label htmlFor="name">Nome</label>
             <input
               type="text"
-              name="name"
               id="name"
               placeholder="Digite aqui seu nome"
               autoComplete="off"
@@ -92,7 +101,6 @@ export default function Register() {
             <label htmlFor="email">Email</label>
             <input
               type="email"
-              name="email"
               id="email"
               placeholder="Digite aqui seu email"
               {...register("email")}
@@ -102,7 +110,6 @@ export default function Register() {
             <label htmlFor="password">Senha</label>
             <input
               type="password"
-              name="password"
               id="password"
               placeholder="Digite aqui sua senha"
               {...register("password")}
@@ -112,7 +119,6 @@ export default function Register() {
             <label htmlFor="confirmPassword">Confirmar senha</label>
             <input
               type="password"
-              name="confirmPassword"
               id="confirmPassword"
               placeholder="Digite aqui sua senha"
               {...register("confirmPassword")}
@@ -122,7 +128,6 @@ export default function Register() {
             <label htmlFor="bio">Bio</label>
             <input
               type="text"
-              name="bio"
               id="bio"
               placeholder="Digite aqui sua biografia"
               {...register("bio")}
@@ -132,7 +137,6 @@ export default function Register() {
             <label htmlFor="contact">Contato</label>
             <input
               type="text"
-              name="contact"
               id="contact"
               placeholder="Opção de contato"
               {...register("contact")}

@@ -8,45 +8,69 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
+import { AuthContext } from "../../providers/provider";
+import { useContext } from "react";
 import "animate.css";
 
 const schema = yup.object({
   status: yup.string().required("Selecione alguma tecnologia"),
 });
 
-export default function Card({
-  card,
-  loggedUserTechs,
-  setUserTechs,
-  setUserEdit,
-}) {
+interface iCard {
+  created_at: string;
+  id: string;
+  status: string;
+  title: string;
+  updated_at: string;
+}
+
+interface iCardProps {
+  card: iCard;
+  setUserEdit: any;
+}
+
+interface iUpdateTech {
+  status: string;
+}
+
+interface iDeleteTech {
+  created_at: string;
+  id: string;
+  status: string;
+  title: string;
+  updated_at: string;
+}
+
+export default function Card({ card, setUserEdit }: iCardProps) {
+  const { setUserTechs } = useContext(AuthContext);
   const [modalIsOpen, setIsOpen] = useState(false);
   const [classAnimate, setClassAnimate] = useState(false);
 
-  const { register, handleSubmit } = useForm({
+  const { register, handleSubmit } = useForm<iUpdateTech>({
     resolver: yupResolver(schema),
   });
 
-  function handleDelete() {
+  async function handleDelete() {
     setClassAnimate(true);
-    api
+    await api
       .delete(`/users/techs/${card.id}`)
       .then((resp) => {
         console.log(resp);
         toast.success("Tecnologia removida com sucesso.");
         setClassAnimate(true);
-        setTimeout(() => {
-          setUserTechs((oldUserTechs) => {
-            return oldUserTechs.filter((userTech) => userTech.id !== card.id);
-          });
-        }, 1000);
+        setUserTechs((oldUserTechs: []) => {
+          console.log(oldUserTechs);
+          return oldUserTechs.filter(
+            (userTech: iDeleteTech) => userTech.id !== card.id
+          );
+        });
       })
       .catch((err) => {
         console.log(err);
       });
   }
 
-  function handleEdit(data) {
+  async function handleEdit(data: iUpdateTech) {
     api
       .put(`/users/techs/${card.id}`, data)
       .then((resp) => {
@@ -97,11 +121,7 @@ export default function Card({
         </div>
         <form onSubmit={handleSubmit(handleEdit)}>
           <label>Selecionar novo status</label>
-          <select
-            name="editTechnology"
-            id="editTechnology"
-            {...register("status")}
-          >
+          <select id="editTechnology" {...register("status")}>
             <option>Iniciante</option>
             <option>Intermediário</option>
             <option>Avançado</option>

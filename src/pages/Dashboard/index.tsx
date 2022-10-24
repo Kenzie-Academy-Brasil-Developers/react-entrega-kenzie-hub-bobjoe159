@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useContext } from "react";
 import { AuthContext } from "../../providers/provider";
 import { useForm } from "react-hook-form";
@@ -23,12 +23,24 @@ const schema = yup.object({
   status: yup.string().required(),
 });
 
+interface iCard {
+  created_at: string;
+  id: string;
+  status: string;
+  title: string;
+  updated_at: string;
+}
+
+interface iRegisterTechs {
+  title: string;
+  status: string;
+}
+
 export default function Dashboard() {
-  const [token, setToken] = useContext(AuthContext);
+  const { setToken, loggedUserTechs, setUserTechs } = useContext(AuthContext);
 
   const [loggedUser, setLoggedUser] = useState("");
   const [loggedModule, setloggedModule] = useState("");
-  const [loggedUserTechs, setUserTechs] = useState("");
   const [modalIsOpen, setIsOpen] = useState(false);
   const [userEdit, setUserEdit] = useState(false);
 
@@ -36,7 +48,7 @@ export default function Dashboard() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
+  } = useForm<iRegisterTechs>({
     resolver: yupResolver(schema),
   });
 
@@ -58,7 +70,7 @@ export default function Dashboard() {
     localStorage.clear();
   }
 
-  async function handleRegisterTech(data) {
+  async function handleRegisterTech(data: iRegisterTechs) {
     await api
       .post("/users/techs/", data)
       .then((resp) => {
@@ -113,7 +125,7 @@ export default function Dashboard() {
             />
             <p className="errorMessage">{errors.title?.message}</p>
             <label htmlFor="status">Selecionar status</label>
-            <select name="status" id="status" {...register("status")}>
+            <select id="status" {...register("status")}>
               <option>Iniciante</option>
               <option>Intermediário</option>
               <option>Avançado</option>
@@ -155,14 +167,8 @@ export default function Dashboard() {
         <div>
           <StyledUl>
             {loggedUserTechs ? (
-              loggedUserTechs.map((card) => (
-                <Card
-                  key={card.id}
-                  card={card}
-                  loggedUserTechs={loggedUserTechs}
-                  setUserTechs={setUserTechs}
-                  setUserEdit={setUserEdit}
-                />
+              loggedUserTechs.map((card: iCard) => (
+                <Card key={card.id} card={card} setUserEdit={setUserEdit} />
               ))
             ) : (
               <></>

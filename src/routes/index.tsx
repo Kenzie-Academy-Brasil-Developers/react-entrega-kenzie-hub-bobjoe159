@@ -9,23 +9,24 @@ import { useEffect } from "react";
 
 const RoutesMain = () => {
   const navigate = useNavigate();
-  const [token, setToken] = useContext(AuthContext);
+  const { token } = useContext(AuthContext);
 
   useEffect(() => {
     if (token) {
-      navigate("/");
+      navigate("/dashboard");
     }
-  }, [token]);
+    navigate("/");
+  }, [token, navigate]);
 
   return (
     <Routes>
       {!token ? (
-        <Route exact path="/" element={<Login />} />
+        <Route path="/" element={<Login />} />
       ) : (
-        <Route exact path="/" g element={<Dashboard />} />
+        <Route path="/" element={<Dashboard />} />
       )}
-      <Route exact path="/register" element={<Register />} />
-      <Route exact path="/dashboard" element={<Dashboard />} />
+      <Route path="/register" element={<Register />} />
+      <Route path="/dashboard" element={<Dashboard />} />
     </Routes>
   );
 };

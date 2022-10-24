@@ -3,7 +3,7 @@ import { AuthContext } from "../../providers/provider";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { LoginDiv, LoginTitle, LoginForm, LinkStyled as Link } from "./style";
-import api from "../../services/axios.js";
+import api from "../../services/axios";
 import * as yup from "yup";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -18,18 +18,23 @@ const schema = yup.object({
   password: yup.string().required("Obrigatório digitar uma senha."),
 });
 
+interface iUserLogin {
+  email: string;
+  password: string;
+}
+
 export default function Login() {
   const navigate = useNavigate();
-  const [token, setToken] = useContext(AuthContext);
+  const { setToken } = useContext(AuthContext);
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
+  } = useForm<iUserLogin>({
     resolver: yupResolver(schema),
   });
 
-  async function handleLogin(data) {
+  async function handleLogin(data: iUserLogin) {
     await api
       .post("/sessions", data)
       .then((resp) => {
@@ -60,7 +65,6 @@ export default function Login() {
         <input
           className="inputEmail"
           type="email"
-          name="email"
           id="email"
           placeholder="Insira seu e-mail"
           autoComplete="off"
@@ -75,7 +79,6 @@ export default function Login() {
         <input
           className="inputPassword"
           type="password"
-          name="password"
           id="password"
           placeholder="Insira sua senha"
           {...register("password")}
