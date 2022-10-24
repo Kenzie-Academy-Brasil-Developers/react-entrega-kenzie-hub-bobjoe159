@@ -65,7 +65,7 @@ export default function Dashboard() {
         .catch((err) => console.log(err));
     };
     asyncCallback();
-  }, [userEdit]);
+  }, [userEdit, setUserTechs]);
 
   function cleanLocalStorage() {
     toast.success("Logout realizado com sucesso.");
