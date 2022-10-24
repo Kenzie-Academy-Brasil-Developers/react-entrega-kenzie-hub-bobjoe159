@@ -5,17 +5,17 @@ interface iProviderProps {
   children: ReactNode;
 }
 
-interface iUserTechs {
-  created_at: string;
-  id: string;
-  status: string;
-  title: string;
-  updated_at: string;
-}
+// interface iUserTechs {
+//   created_at: string;
+//   id: string;
+//   status: string;
+//   title: string;
+//   updated_at: string;
+// }
 
 interface iUserContext {
   token: string;
-  setToken: any;
+  setToken: (c: string) => void;
   loggedUserTechs: any;
   setUserTechs: any;
 }
